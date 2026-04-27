@@ -289,38 +289,58 @@
   .masonry-item .ph-icon { font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5; }
   .masonry-item p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-  /* ── DOWNLOAD ── */
-  #download { background: #05241d; }
-  .video-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
-  .video-text p { color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1rem; }
-  .video-player {
-    border-radius: 12px; overflow: hidden; background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(0,196,154,0.3); aspect-ratio: 16/9;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    position: relative; cursor: pointer; transition: border-color 0.3s;
+  /* ── LIGHTBOX ── */
+  .lightbox-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+    cursor: zoom-out;
   }
-  .video-player:hover { border-color: var(--ocean-teal); }
-  .video-overlay {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(0,196,154,0.1), transparent);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  .lightbox-overlay.active { display: flex; }
+  .lightbox-overlay img {
+    max-width: 90vw; max-height: 82vh; border-radius: 10px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    object-fit: contain;
   }
-  .play-btn {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: var(--ocean-teal); color: var(--ocean-deep);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 0 12px rgba(0,196,154,0.15);
+  .lightbox-caption {
+    color: rgba(255,255,255,0.75); font-size: 0.9rem;
+    letter-spacing: 0.05em; text-align: center;
   }
-  .video-player:hover .play-btn { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(0,196,154,0.2); }
-  .video-caption { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-  .video-label {
-    position: absolute; top: 1rem; left: 1rem;
-    background: rgba(0,0,0,0.6); color: var(--ocean-teal);
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.3rem 0.8rem; border-radius: 4px;
+  .lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-size: 2rem; color: rgba(255,255,255,0.6);
+    cursor: pointer; line-height: 1; transition: color 0.2s;
+    background: none; border: none;
   }
-  .download-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .lightbox-close:hover { color: var(--ocean-teal); }
+
+  .img-thumb {
+    position: relative; border-radius: 8px; overflow: hidden;
+    cursor: zoom-in; display: block;
+  }
+  .img-thumb img { width: 100%; display: block; border-radius: 8px; transition: transform 0.3s; }
+  .img-thumb:hover img { transform: scale(1.03); }
+  .img-thumb .img-legend {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(9,48,40,0.92) 0%, transparent 100%);
+    color: rgba(255,255,255,0.85); font-size: 0.75rem; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 1.2rem 0.8rem 0.6rem;
+    text-align: center; opacity: 0; transition: opacity 0.3s;
+  }
+  .img-thumb:hover .img-legend { opacity: 1; }
+  .img-thumb .zoom-icon {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    background: rgba(0,196,154,0.85); border-radius: 4px;
+    padding: 0.2rem 0.45rem; font-size: 0.7rem; color: var(--ocean-deep);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .img-thumb:hover .zoom-icon { opacity: 1; }
+
+  .masonry-item {
+    padding: 0 !important; border: none !important; background: transparent !important;
+    min-height: unset !important;
+  }
+  .masonry-item:hover { transform: none !important; }
 
   /* ── FOOTER ── */
   footer {
@@ -373,7 +393,7 @@
     <li><a href="#descricao">Como Funciona</a></li>
     <li><a href="#ods">Impacto</a></li>
     <li><a href="#bncc">BNCC</a></li>
-    <li><a href="#download">Download</a></li>
+    <li><a href="#galeria">Galeria</a></li>
   </ul>
 </nav>
 
@@ -469,13 +489,25 @@
     </div>
     <div class="desc-visual">
       <div class="img-container tall">
-        <img src="screenshots/dashboard.png" alt="Dashboard" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <div class="img-thumb" onclick="openLightbox('screenshots/dashboard.png','Dashboard do Educador')">
+          <img src="screenshots/dashboard.png" alt="Dashboard" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+          <span class="img-legend">Dashboard do Educador</span>
+          <span class="zoom-icon">🔍</span>
+        </div>
       </div>
       <div class="img-container">
-        <img src="screenshots/quiz-tela.png" alt="Tela do Quiz" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <div class="img-thumb" onclick="openLightbox('screenshots/quiz-tela.png','Tela do Quiz')">
+          <img src="screenshots/quiz-tela.png" alt="Tela do Quiz" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+          <span class="img-legend">Tela do Quiz</span>
+          <span class="zoom-icon">🔍</span>
+        </div>
       </div>
       <div class="img-container">
-        <img src="screenshots/resultado.png" alt="Tela de Resultados" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <div class="img-thumb" onclick="openLightbox('screenshots/resultado.png','Tela de Inicio')">
+          <img src="screenshots/resultado.png" alt="Tela de Inicio" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+          <span class="img-legend">Tela de Inicio</span>
+          <span class="zoom-icon">🔍</span>
+        </div>
       </div>
     </div>
   </div>
@@ -546,31 +578,46 @@
     <p>Confira algumas telas da versão atual do aplicativo.</p>
   </div>
   <div class="masonry">
-    <div class="masonry-item"><img src="screenshots/menu.png" alt="Menu" style="width:100%; border-radius:8px;"></div>
-    <div class="masonry-item"><img src="screenshots/editor.png" alt="Editor" style="width:100%; border-radius:8px;"></div>
-    <div class="masonry-item"><img src="screenshots/biblioteca.png" alt="Biblioteca" style="width:100%; border-radius:8px;"></div>
-    <div class="masonry-item"><img src="screenshots/acerto.png" alt="Acerto" style="width:100%; border-radius:8px;"></div>
-    <div class="masonry-item"><img src="screenshots/erro.png" alt="Erro" style="width:100%; border-radius:8px;"></div>
-    <div class="masonry-item"><img src="screenshots/stats.png" alt="Estatísticas" style="width:100%; border-radius:8px;"></div>
-  </div>
-</section>
-
-<!-- DOWNLOAD -->
-<section id="download">
-  <div class="video-inner">
-    <div class="video-text">
-      <p class="section-label">06 — Acesso e Download</p>
-      <h2 class="section-title">Experimente o Aplicativo</h2>
-      <p>Assista ao vídeo ao lado para entender como usar o sistema.</p>
-      <div class="download-buttons">
-        <a href="https://projeto-quizmaker.web.app" target="_blank" class="btn btn-primary">🚀 Abrir o QuizMaker</a>
-        <a href="https://github.com/joaoc/QuizMaker" target="_blank" class="btn btn-outline">📄 GitHub</a>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/menu.png','Historico')">
+        <img src="screenshots/menu.png" alt="Historico">
+        <span class="img-legend">Historico</span>
+        <span class="zoom-icon">🔍</span>
       </div>
     </div>
-    <div class="video-player" style="background: url('screenshots/thumb-video.jpg') center/cover;">
-      <div class="video-label">▶ Tutorial de Uso</div>
-      <div class="video-overlay" style="background: rgba(0,0,0,0.4);">
-        <div class="play-btn">▶</div>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/editor.png','Editor de Quiz')">
+        <img src="screenshots/editor.png" alt="Editor">
+        <span class="img-legend">Editor de Quiz</span>
+        <span class="zoom-icon">🔍</span>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/biblioteca.png','Biblioteca de Quizzes')">
+        <img src="screenshots/biblioteca.png" alt="Biblioteca">
+        <span class="img-legend">Biblioteca de Quizzes</span>
+        <span class="zoom-icon">🔍</span>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/acerto.png','Resposta Correta')">
+        <img src="screenshots/acerto.png" alt="Acerto">
+        <span class="img-legend">Resposta Correta</span>
+        <span class="zoom-icon">🔍</span>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/erro.png','Resposta Incorreta')">
+        <img src="screenshots/erro.png" alt="Erro">
+        <span class="img-legend">Resposta Incorreta</span>
+        <span class="zoom-icon">🔍</span>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <div class="img-thumb" onclick="openLightbox('screenshots/stats.png','Estatísticas de Desempenho')">
+        <img src="screenshots/stats.png" alt="Estatísticas">
+        <span class="img-legend">Estatísticas de Desempenho</span>
+        <span class="zoom-icon">🔍</span>
       </div>
     </div>
   </div>
@@ -590,6 +637,28 @@
   </div>
   <p class="footer-note">projeto-quizmaker.web.app</p>
 </footer>
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<script>
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')}); });
+</script>
 
 </body>
 </html>
