@@ -22,9 +22,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--ocean-deep);
@@ -47,13 +45,63 @@
     color: var(--ocean-foam);
     letter-spacing: 0.02em;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
   .nav-links a {
     color: rgba(255,255,255,0.7); text-decoration: none;
     font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
     text-transform: uppercase; transition: color 0.3s;
   }
   .nav-links a:hover { color: var(--ocean-teal); }
+
+  /* Nav CTA button */
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1.2rem; border-radius: 4px;
+    background: var(--ocean-teal); color: var(--ocean-deep) !important;
+    font-weight: 700 !important; font-size: 0.82rem !important;
+    text-transform: uppercase !important; letter-spacing: 0.08em !important;
+    text-decoration: none; transition: all 0.3s;
+    border: none; cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--ocean-foam) !important; transform: translateY(-1px); }
+
+  /* ── FLOATING CTA ── */
+  .floating-cta {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.6rem;
+    background: var(--ocean-teal);
+    color: var(--ocean-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    animation: float-pulse 3s ease-in-out infinite;
+  }
+  .floating-cta:hover {
+    background: var(--ocean-foam);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 14px 40px rgba(0,196,154,0.55), 0 4px 12px rgba(0,0,0,0.2);
+    animation: none;
+  }
+  .floating-cta .arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+  }
+  .floating-cta:hover .arrow { transform: translateX(3px); }
+
+  @keyframes float-pulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 0 0 0 rgba(0,196,154,0.4); }
+    50%       { box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 0 0 10px rgba(0,196,154,0); }
+  }
 
   /* ── HERO ── */
   .hero {
@@ -90,7 +138,7 @@
   }
 
   .hero-cta {
-    display: inline-flex; gap: 1rem; flex-wrap: wrap;
+    display: inline-flex; gap: 1rem; flex-wrap: wrap; align-items: center;
   }
   .btn {
     padding: 0.85rem 2rem; border-radius: 4px;
@@ -107,6 +155,38 @@
     border: 1px solid rgba(255,255,255,0.4);
   }
   .btn-outline:hover { border-color: var(--ocean-teal); color: var(--ocean-teal); }
+
+  /* ── HERO LAUNCH BUTTON ── */
+  .btn-launch {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 1rem 2rem; border-radius: 50px;
+    background: linear-gradient(135deg, var(--ocean-teal), var(--ocean-foam));
+    color: var(--ocean-deep);
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 1rem; cursor: pointer;
+    text-decoration: none; border: none;
+    box-shadow: 0 6px 24px rgba(0,196,154,0.4);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-launch::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2));
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+  .btn-launch:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(0,196,154,0.55);
+  }
+  .btn-launch:hover::after { opacity: 1; }
+  .btn-launch .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ocean-deep);
+    animation: blink 1.4s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
   .hero-scroll {
     position: absolute; bottom: 2.5rem; right: 4rem; z-index: 1;
@@ -271,9 +351,7 @@
   #galeria { background: linear-gradient(180deg, var(--ocean-deep) 0%, #05241d 100%); }
   .galeria-intro { margin-bottom: 3rem; }
   .galeria-intro p { color: rgba(255,255,255,0.7); max-width: 500px; margin-top: 0.8rem; }
-  .masonry {
-    columns: 3; column-gap: 1.2rem;
-  }
+  .masonry { columns: 3; column-gap: 1.2rem; }
   .masonry-item {
     break-inside: avoid; margin-bottom: 1.2rem;
     border-radius: 10px; overflow: hidden;
@@ -295,10 +373,90 @@
   .masonry-item .ph-icon { font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5; }
   .masonry-item p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
+  /* ── ACESSO DIRETO (new section) ── */
+  #acesso {
+    background: linear-gradient(135deg, #041f16 0%, var(--ocean-deep) 100%);
+    position: relative; overflow: hidden;
+  }
+  #acesso::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,196,154,0.12) 0%, transparent 70%);
+  }
+  .acesso-inner {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 2rem;
+  }
+  .acesso-inner .section-title { margin-bottom: 0; }
+  .acesso-inner p { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
+
+  /* Role cards */
+  .role-cards {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .role-card {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.8rem; padding: 2rem 2.5rem; border-radius: 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(0,196,154,0.25);
+    text-decoration: none; color: var(--white);
+    transition: all 0.3s; min-width: 160px;
+  }
+  .role-card:hover {
+    background: rgba(0,196,154,0.15);
+    border-color: var(--ocean-teal);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0,196,154,0.2);
+  }
+  .role-card .role-emoji { font-size: 3rem; }
+  .role-card .role-name {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.1rem; color: var(--ocean-foam);
+  }
+  .role-card .role-desc {
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    text-align: center; line-height: 1.4;
+  }
+
+  .acesso-cta-row {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  .btn-acesso-main {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 1.1rem 2.8rem; border-radius: 50px;
+    background: var(--ocean-teal);
+    color: var(--ocean-deep);
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 1.05rem; text-decoration: none;
+    box-shadow: 0 6px 28px rgba(0,196,154,0.45);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-acesso-main::before {
+    content: '';
+    position: absolute; top: -50%; left: -60%;
+    width: 40%; height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-20deg);
+    transition: left 0.5s;
+  }
+  .btn-acesso-main:hover::before { left: 120%; }
+  .btn-acesso-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,196,154,0.6);
+    background: var(--ocean-foam);
+  }
+  .acesso-note {
+    font-size: 0.8rem; color: rgba(255,255,255,0.35);
+  }
+
   /* ── VÍDEO & DOWNLOAD ── */
   #download { background: #05241d; }
   .video-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
   .video-text p { color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1rem; }
+  .video-text .cta-group { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
   .video-player {
     border-radius: 12px; overflow: hidden;
     background: rgba(0,0,0,0.4);
@@ -354,13 +512,8 @@
   .footer-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
 
   /* ── ANIMATIONS ── */
-  .fade-up {
-    opacity: 0; transform: translateY(24px);
-    animation: fadeUp 0.7s ease forwards;
-  }
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
   .delay-1 { animation-delay: 0.15s; }
   .delay-2 { animation-delay: 0.3s; }
   .delay-3 { animation-delay: 0.45s; }
@@ -381,10 +534,17 @@
     .bncc-grid, .desc-visual { grid-template-columns: 1fr; }
     .masonry { columns: 1; }
     .ods-grid { grid-template-columns: 1fr 1fr; }
+    .floating-cta { bottom: 20px; right: 20px; padding: 0.75rem 1.2rem; font-size: 0.85rem; }
+    .role-cards { flex-direction: column; align-items: center; }
   }
 </style>
 </head>
 <body>
+
+<!-- ── FLOATING CTA (always visible) ─────────────────────────────────────── -->
+<a href="https://projeto-quizmaker.web.app" class="floating-cta" title="Acessar o sistema">
+  🚀 Acessar o Sistema <span class="arrow">→</span>
+</a>
 
 <!-- NAV -->
 <nav>
@@ -395,7 +555,7 @@
     <li><a href="#ods">Impacto</a></li>
     <li><a href="#bncc">BNCC</a></li>
     <li><a href="#galeria">Galeria</a></li>
-    <li><a href="#download">Baixar Software</a></li>
+    <li><a href="https://projeto-quizmaker.web.app" class="nav-cta">▶ Acessar</a></li>
   </ul>
 </nav>
 
@@ -410,8 +570,12 @@
       Uma ferramenta de software criada para professores e estudantes estruturarem avaliações em formato de quiz interativo de maneira rápida e visual.
     </p>
     <div class="hero-cta fade-up delay-3">
-      <a href="#objetivo" class="btn btn-primary">Conhecer o Projeto</a>
-      <a href="#download" class="btn btn-outline">Baixar o Software</a>
+      <!-- Primary: go to the app -->
+      <a href="https://projeto-quizmaker.web.app" class="btn-launch">
+        <span class="dot"></span>
+        Acessar o QuizMaker
+      </a>
+      <a href="#objetivo" class="btn btn-outline">Conhecer o Projeto</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -436,7 +600,7 @@
     <div class="objetivo-card">
       <h3>🎯 Meta do Software</h3>
       <p>
-        Facilitar o acesso à tecnologia na educação, oferecendo uma plataforma offline/online simples, gratuita e intuitiva para que professores de qualquer disciplina possam gamificar suas aulas em poucos cliques.
+        Facilitar o acesso à tecnologia na educação, oferecendo uma plataforma simples, gratuita e intuitiva para que professores de qualquer disciplina possam gamificar suas aulas em poucos cliques — sem precisar de senha ou cadastro.
       </p>
     </div>
   </div>
@@ -452,6 +616,13 @@
         O QuizMaker possui uma interface limpa dividida em duas grandes áreas: a Área do Educador (para criar os desafios) e a Área do Aluno (para jogar).
       </p>
       <ul class="features-list">
+        <li>
+          <span class="feat-icon">👨‍🏫</span>
+          <div class="feat-text">
+            <strong>Acesso sem senha</strong>
+            <span>Selecione "Professor" ou "Aluno", informe seu nome e pronto. Sem cadastro.</span>
+          </div>
+        </li>
         <li>
           <span class="feat-icon">📝</span>
           <div class="feat-text">
@@ -469,15 +640,8 @@
         <li>
           <span class="feat-icon">📊</span>
           <div class="feat-text">
-            <strong>Cálculo de Resultados</strong>
-            <span>Ao final do quiz, o aluno recebe sua pontuação e mensagens de incentivo automaticamente.</span>
-          </div>
-        </li>
-        <li>
-          <span class="feat-icon">💻</span>
-          <div class="feat-text">
-            <strong>Leve e Acessível</strong>
-            <span>Funciona em computadores básicos e pode ser executado sem internet (modo offline).</span>
+            <strong>Placar e Resultado</strong>
+            <span>Ao final do quiz, o aluno recebe sua pontuação e mensagens de incentivo.</span>
           </div>
         </li>
       </ul>
@@ -565,8 +729,8 @@
   </div>
   <div class="masonry">
     <div class="masonry-item">
-      <div class="ph-icon">💻</div>
-      <p>Menu Principal<br><small>Navegação intuitiva</small></p>
+      <div class="ph-icon">🎯</div>
+      <p>Tela de Entrada<br><small>Escolha Professor ou Aluno</small></p>
     </div>
     <div class="masonry-item">
       <div class="ph-icon">📝</div>
@@ -591,20 +755,55 @@
   </div>
 </section>
 
+<!-- ── ACESSO DIRETO (new) ───────────────────────────────────────────────── -->
+<section id="acesso">
+  <div class="acesso-inner">
+    <p class="section-label" style="justify-content:center;">06 — Acesso</p>
+    <h2 class="section-title">Comece a usar agora</h2>
+    <p>
+      Sem cadastro, sem senha. Selecione seu perfil, informe seu nome e entre direto na plataforma.
+    </p>
+
+    <!-- Role preview cards -->
+    <div class="role-cards">
+      <a href="/" class="role-card">
+        <span class="role-emoji">👨‍🏫</span>
+        <span class="role-name">Professor</span>
+        <span class="role-desc">Criar e publicar<br>quizzes</span>
+      </a>
+      <a href="/" class="role-card">
+        <span class="role-emoji">🎓</span>
+        <span class="role-name">Aluno</span>
+        <span class="role-desc">Jogar quizzes<br>publicados</span>
+      </a>
+    </div>
+
+    <div class="acesso-cta-row">
+      <a href="https://projeto-quizmaker.web.app" class="btn-acesso-main">
+        🚀 Entrar no QuizMaker
+      </a>
+      <span class="acesso-note">Abre em segundos — funciona em qualquer dispositivo</span>
+    </div>
+  </div>
+</section>
+
 <!-- VÍDEO E DOWNLOAD -->
 <section id="download">
   <div class="video-inner">
     <div class="video-text">
-      <p class="section-label">06 — Download e Uso</p>
+      <p class="section-label">07 — Download e Uso</p>
       <h2 class="section-title">Experimente o Aplicativo</h2>
       <p>
-        Assista ao vídeo ao lado para entender passo a passo como instalar o software, criar seu primeiro questionário e executá-lo em sala de aula.
+        Assista ao vídeo ao lado para entender passo a passo como criar seu primeiro questionário e executá-lo em sala de aula.
       </p>
       <p>
-        O aplicativo está disponível gratuitamente. Clique no botão abaixo para baixar os arquivos (versão web estática .ZIP).
+        Prefere ter uma cópia local? Baixe os arquivos abaixo. Ou acesse diretamente o sistema online clicando no botão verde.
       </p>
-      <a href="#" class="btn btn-primary" style="margin-top: 1rem;">↓ Baixar Aplicativo (.ZIP)</a>
-      <a href="#" class="btn btn-outline" style="margin-top: 1rem; margin-left: 0.5rem;">📄 Ler Documentação</a>
+      <div class="cta-group">
+        <a href="https://projeto-quizmaker.web.app" class="btn btn-primary">▶ Acessar o Sistema</a>
+        <a href="#" class="btn btn-outline">↓ Baixar (.ZIP)</a>
+        <a href="#" class="btn btn-outline">📄 Documentação</a>
+      </div>
     </div>
     <div class="video-player">
       <div class="video-label">▶ Tutorial de Uso</div>
@@ -624,11 +823,13 @@
   </div>
   <div class="footer-tags">
     <span class="tag">EdTech</span>
-    <span class="tag">Open Source</span>
+    <span class="tag">Sem Login</span>
     <span class="tag">Educação</span>
     <span class="tag">Gamificação</span>
   </div>
-  <p class="footer-note">Template Original · Cultura Oceânica</p>
+  <a href="/" style="text-decoration:none;">
+    <span class="tag" style="background:rgba(0,196,154,0.2); border-color:var(--ocean-teal); color:var(--ocean-teal); font-weight:700; padding: 0.4rem 1rem;">▶ Acessar →</span>
+  </a>
 </footer>
 
 </body>
