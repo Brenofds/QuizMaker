@@ -4,7 +4,7 @@
       "collectionGroup": "quizzes",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "authorId",  "order": "ASCENDING" },
+        { "fieldPath": "authorId", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
     },
@@ -20,14 +20,7 @@
       "collectionGroup": "results",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "authorId",  "order": "ASCENDING" },
-        { "fieldPath": "createdAt", "order": "DESCENDING" }
-      ]
-    },
-    {
-      "collectionGroup": "results",
-      "queryScope": "COLLECTION",
-      "fields": [
+        { "fieldPath": "authorId", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
     }
