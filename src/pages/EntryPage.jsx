@@ -1,53 +1,68 @@
 // src/pages/EntryPage.jsx
-// Tela de entrada: escolha Professor ou Aluno, informe o nome. Pronto.
-
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'; // Adicionado useEffect
+import { useNavigate, useSearchParams } from 'react-router-dom'; // Adicionado useSearchParams
 import { BookOpen, GraduationCap, ArrowRight, FileQuestion } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button, Input, Field } from '../components/ui';
 
 const ROLES = [
   {
-    key:      'teacher',
-    label:    'Professor',
-    emoji:    '👨‍🏫',
-    desc:     'Crie e gerencie seus quizzes',
-    icon:     BookOpen,
-    color:    'var(--navy)',
-    bg:       'var(--navy)',
-    textColor:'#fff',
-    dest:     '/teacher',
+    key: 'teacher',
+    label: 'Professor',
+    emoji: '👨‍🏫',
+    desc: 'Crie e gerencie seus quizzes',
+    icon: BookOpen,
+    color: 'var(--navy)',
+    bg: 'var(--navy)',
+    textColor: '#fff',
+    dest: '/teacher',
   },
   {
-    key:      'student',
-    label:    'Aluno',
-    emoji:    '🎓',
-    desc:     'Responda quizzes publicados',
-    icon:     GraduationCap,
-    color:    'var(--amber-dark)',
-    bg:       'var(--amber)',
-    textColor:'var(--navy)',
-    dest:     '/student',
+    key: 'student',
+    label: 'Aluno',
+    emoji: '🎓',
+    desc: 'Responda quizzes publicados',
+    icon: GraduationCap,
+    color: 'var(--amber-dark)',
+    bg: 'var(--amber)',
+    textColor: 'var(--navy)',
+    dest: '/student',
   },
 ];
 
 export default function EntryPage() {
   const { enter } = useAuth();
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams(); // Hook para ler a URL
 
   const [selectedRole, setSelectedRole] = useState(null);
-  const [name, setName]                 = useState('');
-  const [error, setError]               = useState('');
-  const [loading, setLoading]           = useState(false);
+  const [name, setName] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Lógica para capturar o papel vindo do Portfólio/Landing Page
+  useEffect(() => {
+    const role = searchParams.get('role');
+    if (role === 'teacher' || role === 'student') {
+      setSelectedRole(role);
+    }
+  }, [searchParams]);
 
   const roleObj = ROLES.find(r => r.key === selectedRole);
 
   const handleEnter = async () => {
-    if (!name.trim()) { setError('Digite seu nome para continuar'); return; }
+    if (!name.trim()) {
+      setError('Digite seu nome para continuar');
+      return;
+    }
     setLoading(true);
-    enter(name.trim(), selectedRole);
-    navigate(roleObj.dest, { replace: true });
+    try {
+      await enter(name.trim(), selectedRole);
+      navigate(roleObj.dest, { replace: true });
+    } catch (err) {
+      setError('Erro ao entrar. Tente novamente.');
+      setLoading(false);
+    }
   };
 
   return (
@@ -147,7 +162,7 @@ export default function EntryPage() {
 
         {/* Step 2 — enter name */}
         {selectedRole && (
-          <div className="card animate-fade-up" style={{ padding: 36 }}>
+          <div className="card animate-fade-up" style={{ padding: 36, background: '#fff', borderRadius: 24 }}>
             {/* Role badge */}
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,

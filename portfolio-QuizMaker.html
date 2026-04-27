@@ -14,7 +14,6 @@
     --ocean-foam: #7ae5c9;
     --ocean-light: #d4f8ef;
     --sand: #f5ede3;
-    --coral: #ff6b6b;
     --gold: #f4c542;
     --white: #ffffff;
     --text-dark: #093028;
@@ -45,63 +44,13 @@
     color: var(--ocean-foam);
     letter-spacing: 0.02em;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: rgba(255,255,255,0.7); text-decoration: none;
     font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
     text-transform: uppercase; transition: color 0.3s;
   }
   .nav-links a:hover { color: var(--ocean-teal); }
-
-  /* Nav CTA button */
-  .nav-cta {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.5rem 1.2rem; border-radius: 4px;
-    background: var(--ocean-teal); color: var(--ocean-deep) !important;
-    font-weight: 700 !important; font-size: 0.82rem !important;
-    text-transform: uppercase !important; letter-spacing: 0.08em !important;
-    text-decoration: none; transition: all 0.3s;
-    border: none; cursor: pointer;
-  }
-  .nav-cta:hover { background: var(--ocean-foam) !important; transform: translateY(-1px); }
-
-  /* ── FLOATING CTA ── */
-  .floating-cta {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.9rem 1.6rem;
-    background: var(--ocean-teal);
-    color: var(--ocean-deep);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 2px 8px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    animation: float-pulse 3s ease-in-out infinite;
-  }
-  .floating-cta:hover {
-    background: var(--ocean-foam);
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 14px 40px rgba(0,196,154,0.55), 0 4px 12px rgba(0,0,0,0.2);
-    animation: none;
-  }
-  .floating-cta .arrow {
-    font-size: 1.1rem;
-    transition: transform 0.3s;
-  }
-  .floating-cta:hover .arrow { transform: translateX(3px); }
-
-  @keyframes float-pulse {
-    0%, 100% { box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 0 0 0 rgba(0,196,154,0.4); }
-    50%       { box-shadow: 0 8px 32px rgba(0,196,154,0.45), 0 0 0 10px rgba(0,196,154,0); }
-  }
 
   /* ── HERO ── */
   .hero {
@@ -116,7 +65,6 @@
     background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,196,154,0.15) 0%, transparent 70%),
                 radial-gradient(ellipse 40% 80% at 20% 80%, rgba(19,84,67,0.5) 0%, transparent 60%);
   }
-
   .hero-content { position: relative; z-index: 1; max-width: 700px; }
   .hero-eyebrow {
     font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
@@ -124,69 +72,33 @@
     display: flex; align-items: center; gap: 0.8rem;
   }
   .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--ocean-teal); }
-
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.05;
     font-weight: 900; margin-bottom: 1.5rem;
   }
   .hero h1 em { font-style: italic; color: var(--ocean-foam); }
-
   .hero-desc {
     font-size: 1.1rem; line-height: 1.7;
     color: rgba(255,255,255,0.7); max-width: 520px; margin-bottom: 2.5rem;
   }
+  .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; }
 
-  .hero-cta {
-    display: inline-flex; gap: 1rem; flex-wrap: wrap; align-items: center;
-  }
   .btn {
     padding: 0.85rem 2rem; border-radius: 4px;
     font-family: 'DM Sans', sans-serif; font-weight: 500;
     font-size: 0.9rem; cursor: pointer; transition: all 0.3s;
-    text-decoration: none; border: none;
+    text-decoration: none; border: none; display: inline-flex;
+    align-items: center; gap: 0.5rem;
   }
-  .btn-primary {
-    background: var(--ocean-teal); color: var(--ocean-deep);
-  }
+  .btn-primary { background: var(--ocean-teal); color: var(--ocean-deep); }
   .btn-primary:hover { background: var(--ocean-foam); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent; color: var(--white);
-    border: 1px solid rgba(255,255,255,0.4);
-  }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
   .btn-outline:hover { border-color: var(--ocean-teal); color: var(--ocean-teal); }
-
-  /* ── HERO LAUNCH BUTTON ── */
-  .btn-launch {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 1rem 2rem; border-radius: 50px;
-    background: linear-gradient(135deg, var(--ocean-teal), var(--ocean-foam));
-    color: var(--ocean-deep);
-    font-family: 'DM Sans', sans-serif; font-weight: 700;
-    font-size: 1rem; cursor: pointer;
-    text-decoration: none; border: none;
-    box-shadow: 0 6px 24px rgba(0,196,154,0.4);
-    transition: all 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .btn-launch::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2));
-    transition: opacity 0.3s;
-    opacity: 0;
-  }
-  .btn-launch:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 36px rgba(0,196,154,0.55);
-  }
-  .btn-launch:hover::after { opacity: 1; }
-  .btn-launch .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--ocean-deep);
-    animation: blink 1.4s ease-in-out infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .btn-amber { background: #F5A623; color: #0F1B2D; }
+  .btn-amber:hover { background: #f7b84a; transform: translateY(-2px); }
+  .btn-navy { background: #0F1B2D; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+  .btn-navy:hover { background: #1A2D45; transform: translateY(-2px); }
 
   .hero-scroll {
     position: absolute; bottom: 2.5rem; right: 4rem; z-index: 1;
@@ -201,16 +113,78 @@
   }
   @keyframes scroll-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
+  /* ── ACESSO RÁPIDO ── */
+  #acesso {
+    background: linear-gradient(135deg, #0F1B2D 0%, #1A2D45 100%);
+    padding: 5rem 4rem;
+    border-top: 1px solid rgba(0,196,154,0.2);
+    border-bottom: 1px solid rgba(0,196,154,0.2);
+  }
+  .acesso-header { text-align: center; margin-bottom: 3rem; }
+  .acesso-header .section-label { justify-content: center; margin-bottom: 1rem; }
+  .acesso-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
+  .acesso-header p { color: rgba(255,255,255,0.6); margin-top: 0.8rem; font-size: 1rem; }
+  .acesso-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    max-width: 800px; margin: 0 auto;
+  }
+  .acesso-card {
+    border-radius: 16px; padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+    text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .acesso-card::before {
+    content: ''; position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .acesso-card:hover { transform: translateY(-6px); }
+  .acesso-card:hover::before { opacity: 1; }
+
+  .acesso-card.professor {
+    background: linear-gradient(135deg, #0F1B2D 0%, #1A3A5C 100%);
+    border: 1.5px solid rgba(245,166,35,0.3);
+    box-shadow: 0 4px 24px rgba(245,166,35,0.1);
+  }
+  .acesso-card.professor:hover {
+    border-color: rgba(245,166,35,0.7);
+    box-shadow: 0 12px 40px rgba(245,166,35,0.2);
+  }
+  .acesso-card.aluno {
+    background: linear-gradient(135deg, #093028 0%, #135443 100%);
+    border: 1.5px solid rgba(0,196,154,0.3);
+    box-shadow: 0 4px 24px rgba(0,196,154,0.1);
+  }
+  .acesso-card.aluno:hover {
+    border-color: rgba(0,196,154,0.7);
+    box-shadow: 0 12px 40px rgba(0,196,154,0.2);
+  }
+
+  .acesso-emoji { font-size: 3rem; line-height: 1; }
+  .acesso-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white);
+  }
+  .acesso-card p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .acesso-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.4rem 1rem; border-radius: 999px;
+    font-size: 0.8rem; font-weight: 600; margin-top: auto;
+  }
+  .acesso-card.professor .acesso-tag { background: rgba(245,166,35,0.2); color: #F5A623; }
+  .acesso-card.aluno .acesso-tag { background: rgba(0,196,154,0.2); color: var(--ocean-teal); }
+
   /* ── SECTIONS ── */
   section { padding: 6rem 4rem; }
-
   .section-label {
     font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--ocean-teal); font-weight: 500; margin-bottom: 1rem;
     display: flex; align-items: center; gap: 0.8rem;
   }
   .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--ocean-teal); }
-
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.2;
@@ -218,105 +192,58 @@
   }
 
   /* ── OBJETIVO ── */
-  #objetivo {
-    background: var(--sand);
-    color: var(--text-dark);
-    position: relative; overflow: hidden;
-  }
+  #objetivo { background: var(--sand); color: var(--text-dark); position: relative; overflow: hidden; }
   #objetivo::after {
-    content: 'Q';
-    position: absolute; right: -2rem; bottom: -4rem;
+    content: 'Q'; position: absolute; right: -2rem; bottom: -4rem;
     font-family: 'Playfair Display', serif;
     font-size: 22rem; font-weight: 900; color: rgba(0,196,154,0.08);
     line-height: 1; pointer-events: none;
   }
-  .objetivo-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
-    align-items: center; position: relative; z-index: 1;
-  }
+  .objetivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
   .objetivo-text .section-label { color: var(--ocean-mid); }
   .objetivo-text .section-label::before { background: var(--ocean-mid); }
   .objetivo-text .section-title { color: var(--text-dark); }
-  .objetivo-text p {
-    font-size: 1.05rem; line-height: 1.8;
-    color: var(--text-mid); margin-bottom: 1.2rem;
-  }
+  .objetivo-text p { font-size: 1.05rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
   .objetivo-card {
     background: var(--ocean-deep); border-radius: 12px;
-    padding: 2.5rem; color: var(--white);
-    border-top: 3px solid var(--ocean-teal);
+    padding: 2.5rem; color: var(--white); border-top: 3px solid var(--ocean-teal);
   }
-  .objetivo-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; margin-bottom: 1rem; color: var(--ocean-foam);
-  }
+  .objetivo-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; color: var(--ocean-foam); }
   .objetivo-card p { font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.75); }
 
   /* ── DESCRIÇÃO ── */
-  #descricao {
-    background: linear-gradient(135deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%);
-    position: relative; overflow: hidden;
-  }
+  #descricao { background: linear-gradient(135deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%); position: relative; overflow: hidden; }
   .desc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; }
-  .desc-text p {
-    font-size: 1.05rem; line-height: 1.8;
-    color: rgba(255,255,255,0.8); margin-bottom: 1.2rem;
-  }
+  .desc-text p { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 1.2rem; }
   .features-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
   .features-list li {
     display: flex; align-items: flex-start; gap: 1rem;
     padding: 1rem 1.2rem; border-radius: 8px;
-    background: rgba(255,255,255,0.05);
-    border-left: 2px solid var(--ocean-teal);
+    background: rgba(255,255,255,0.05); border-left: 2px solid var(--ocean-teal);
   }
   .feat-icon { font-size: 1.4rem; flex-shrink: 0; }
   .feat-text strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--ocean-foam); }
   .feat-text span { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
-
-  .desc-visual {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  }
+  .desc-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .img-placeholder {
     border-radius: 8px; overflow: hidden;
-    background: rgba(0,196,154,0.1);
-    border: 1px dashed rgba(0,196,154,0.3);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 2rem 1rem;
-    aspect-ratio: 4/3;
-    transition: all 0.3s;
-    cursor: pointer;
+    background: rgba(0,196,154,0.1); border: 1px dashed rgba(0,196,154,0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 2rem 1rem; aspect-ratio: 4/3; transition: all 0.3s; cursor: pointer;
   }
-  .img-placeholder:hover {
-    background: rgba(0,196,154,0.18);
-    border-color: var(--ocean-teal);
-    transform: translateY(-3px);
-  }
+  .img-placeholder:hover { background: rgba(0,196,154,0.18); border-color: var(--ocean-teal); transform: translateY(-3px); }
   .img-placeholder .ph-icon { font-size: 2.5rem; margin-bottom: 0.6rem; opacity: 0.6; }
   .img-placeholder p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
   .img-placeholder.tall { grid-row: span 2; aspect-ratio: unset; }
 
   /* ── ODS ── */
-  #ods {
-    background: var(--ocean-deep);
-    border-top: 1px solid rgba(0,196,154,0.15);
-    border-bottom: 1px solid rgba(0,196,154,0.15);
-  }
+  #ods { background: var(--ocean-deep); border-top: 1px solid rgba(0,196,154,0.15); border-bottom: 1px solid rgba(0,196,154,0.15); }
   .ods-intro { max-width: 600px; margin-bottom: 3.5rem; }
   .ods-intro p { color: rgba(255,255,255,0.7); line-height: 1.7; margin-top: 1rem; }
   .ods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
-  .ods-card {
-    border-radius: 10px; padding: 1.8rem 1.5rem;
-    position: relative; overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: default;
-  }
+  .ods-card { border-radius: 10px; padding: 1.8rem 1.5rem; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: default; }
   .ods-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-  .ods-card .ods-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem; font-weight: 900;
-    line-height: 1; margin-bottom: 0.6rem; opacity: 0.9;
-  }
+  .ods-card .ods-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.6rem; opacity: 0.9; }
   .ods-card h4 { font-size: 0.9rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
   .ods-card p { font-size: 0.78rem; opacity: 0.8; line-height: 1.5; }
   .ods-4  { background: #c31f33; }
@@ -332,16 +259,14 @@
   .bncc-intro p { color: var(--text-mid); font-size: 1rem; line-height: 1.8; max-width: 650px; margin-bottom: 2.5rem; }
   .bncc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
   .bncc-card {
-    background: var(--white); border-radius: 10px;
-    padding: 1.8rem; border-top: 3px solid var(--ocean-mid);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    transition: box-shadow 0.3s, transform 0.3s;
+    background: var(--white); border-radius: 10px; padding: 1.8rem;
+    border-top: 3px solid var(--ocean-mid);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: box-shadow 0.3s, transform 0.3s;
   }
   .bncc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
   .bncc-tag {
-    display: inline-block; background: var(--ocean-light);
-    color: var(--ocean-mid); font-size: 0.72rem;
-    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    display: inline-block; background: var(--ocean-light); color: var(--ocean-mid);
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 0.25rem 0.7rem; border-radius: 20px; margin-bottom: 1rem;
   }
   .bncc-card h4 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
@@ -353,126 +278,32 @@
   .galeria-intro p { color: rgba(255,255,255,0.7); max-width: 500px; margin-top: 0.8rem; }
   .masonry { columns: 3; column-gap: 1.2rem; }
   .masonry-item {
-    break-inside: avoid; margin-bottom: 1.2rem;
-    border-radius: 10px; overflow: hidden;
-    background: rgba(0,196,154,0.08);
-    border: 1px dashed rgba(0,196,154,0.25);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 3rem 1.5rem; text-align: center;
-    transition: all 0.3s; cursor: pointer;
-    min-height: 180px;
+    break-inside: avoid; margin-bottom: 1.2rem; border-radius: 10px; overflow: hidden;
+    background: rgba(0,196,154,0.08); border: 1px dashed rgba(0,196,154,0.25);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 3rem 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer; min-height: 180px;
   }
   .masonry-item:nth-child(2n) { min-height: 240px; }
   .masonry-item:nth-child(3n) { min-height: 200px; }
-  .masonry-item:hover {
-    background: rgba(0,196,154,0.15);
-    border-color: var(--ocean-teal);
-    transform: scale(1.01);
-  }
+  .masonry-item:hover { background: rgba(0,196,154,0.15); border-color: var(--ocean-teal); transform: scale(1.01); }
   .masonry-item .ph-icon { font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5; }
   .masonry-item p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-  /* ── ACESSO DIRETO (new section) ── */
-  #acesso {
-    background: linear-gradient(135deg, #041f16 0%, var(--ocean-deep) 100%);
-    position: relative; overflow: hidden;
-  }
-  #acesso::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,196,154,0.12) 0%, transparent 70%);
-  }
-  .acesso-inner {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    gap: 2rem;
-  }
-  .acesso-inner .section-title { margin-bottom: 0; }
-  .acesso-inner p { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
-
-  /* Role cards */
-  .role-cards {
-    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
-    margin-top: 0.5rem;
-  }
-  .role-card {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 0.8rem; padding: 2rem 2.5rem; border-radius: 16px;
-    background: rgba(255,255,255,0.06);
-    border: 1.5px solid rgba(0,196,154,0.25);
-    text-decoration: none; color: var(--white);
-    transition: all 0.3s; min-width: 160px;
-  }
-  .role-card:hover {
-    background: rgba(0,196,154,0.15);
-    border-color: var(--ocean-teal);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(0,196,154,0.2);
-  }
-  .role-card .role-emoji { font-size: 3rem; }
-  .role-card .role-name {
-    font-family: 'Playfair Display', serif; font-weight: 700;
-    font-size: 1.1rem; color: var(--ocean-foam);
-  }
-  .role-card .role-desc {
-    font-size: 0.8rem; color: rgba(255,255,255,0.5);
-    text-align: center; line-height: 1.4;
-  }
-
-  .acesso-cta-row {
-    display: flex; flex-direction: column; align-items: center; gap: 1rem;
-  }
-  .btn-acesso-main {
-    display: inline-flex; align-items: center; gap: 0.7rem;
-    padding: 1.1rem 2.8rem; border-radius: 50px;
-    background: var(--ocean-teal);
-    color: var(--ocean-deep);
-    font-family: 'DM Sans', sans-serif; font-weight: 700;
-    font-size: 1.05rem; text-decoration: none;
-    box-shadow: 0 6px 28px rgba(0,196,154,0.45);
-    transition: all 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .btn-acesso-main::before {
-    content: '';
-    position: absolute; top: -50%; left: -60%;
-    width: 40%; height: 200%;
-    background: rgba(255,255,255,0.2);
-    transform: skewX(-20deg);
-    transition: left 0.5s;
-  }
-  .btn-acesso-main:hover::before { left: 120%; }
-  .btn-acesso-main:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,196,154,0.6);
-    background: var(--ocean-foam);
-  }
-  .acesso-note {
-    font-size: 0.8rem; color: rgba(255,255,255,0.35);
-  }
-
-  /* ── VÍDEO & DOWNLOAD ── */
+  /* ── DOWNLOAD ── */
   #download { background: #05241d; }
   .video-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
   .video-text p { color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1rem; }
-  .video-text .cta-group { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
   .video-player {
-    border-radius: 12px; overflow: hidden;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(0,196,154,0.3);
-    aspect-ratio: 16/9;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative; cursor: pointer;
-    transition: border-color 0.3s;
+    border-radius: 12px; overflow: hidden; background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,196,154,0.3); aspect-ratio: 16/9;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; cursor: pointer; transition: border-color 0.3s;
   }
   .video-player:hover { border-color: var(--ocean-teal); }
   .video-overlay {
     position: absolute; inset: 0;
     background: radial-gradient(ellipse at center, rgba(0,196,154,0.1), transparent);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 1rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
   }
   .play-btn {
     width: 64px; height: 64px; border-radius: 50%;
@@ -489,26 +320,18 @@
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
     padding: 0.3rem 0.8rem; border-radius: 4px;
   }
+  .download-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
 
   /* ── FOOTER ── */
   footer {
     background: #031712; padding: 3rem 4rem;
     border-top: 1px solid rgba(0,196,154,0.1);
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
   }
-  .footer-brand {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; font-size: 1.3rem;
-    color: var(--ocean-foam);
-  }
+  .footer-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--ocean-foam); }
   .footer-brand span { display: block; font-family: 'DM Sans', sans-serif; font-style: normal; font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
   .footer-tags { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-  .tag {
-    background: rgba(0,196,154,0.1); color: var(--ocean-teal);
-    font-size: 0.75rem; padding: 0.3rem 0.9rem;
-    border-radius: 20px; border: 1px solid rgba(0,196,154,0.2);
-  }
+  .tag { background: rgba(0,196,154,0.1); color: var(--ocean-teal); font-size: 0.75rem; padding: 0.3rem 0.9rem; border-radius: 20px; border: 1px solid rgba(0,196,154,0.2); }
   .footer-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
 
   /* ── ANIMATIONS ── */
@@ -522,10 +345,11 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1rem 2rem; }
-    section { padding: 4rem 2rem; }
+    section, #acesso { padding: 4rem 2rem; }
     .objetivo-grid, .desc-grid, .video-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .bncc-grid { grid-template-columns: 1fr 1fr; }
     .masonry { columns: 2; }
+    .acesso-cards { grid-template-columns: 1fr; max-width: 420px; }
     footer { flex-direction: column; text-align: center; }
   }
   @media (max-width: 600px) {
@@ -534,28 +358,22 @@
     .bncc-grid, .desc-visual { grid-template-columns: 1fr; }
     .masonry { columns: 1; }
     .ods-grid { grid-template-columns: 1fr 1fr; }
-    .floating-cta { bottom: 20px; right: 20px; padding: 0.75rem 1.2rem; font-size: 0.85rem; }
-    .role-cards { flex-direction: column; align-items: center; }
+    .download-buttons { flex-direction: column; }
   }
 </style>
 </head>
 <body>
 
-<!-- ── FLOATING CTA (always visible) ─────────────────────────────────────── -->
-<a href="https://projeto-quizmaker.web.app" class="floating-cta" title="Acessar o sistema">
-  🚀 Acessar o Sistema <span class="arrow">→</span>
-</a>
-
 <!-- NAV -->
 <nav>
   <div class="nav-logo">QuizMaker Educacional</div>
   <ul class="nav-links">
+    <li><a href="#acesso">Acessar Sistema</a></li>
     <li><a href="#objetivo">Objetivo</a></li>
     <li><a href="#descricao">Como Funciona</a></li>
     <li><a href="#ods">Impacto</a></li>
     <li><a href="#bncc">BNCC</a></li>
-    <li><a href="#galeria">Galeria</a></li>
-    <li><a href="https://projeto-quizmaker.web.app" class="nav-cta">▶ Acessar</a></li>
+    <li><a href="#download">Download</a></li>
   </ul>
 </nav>
 
@@ -567,20 +385,39 @@
       QuizMaker<br><em>Educacional</em><br>Plataforma Interativa
     </h1>
     <p class="hero-desc fade-up delay-2">
-      Uma ferramenta de software criada para professores e estudantes estruturarem avaliações em formato de quiz interativo de maneira rápida e visual.
+      Uma ferramenta criada para professores e estudantes criarem e responderem quizzes interativos de forma rápida, visual e engajadora.
     </p>
     <div class="hero-cta fade-up delay-3">
-      <!-- Primary: go to the app -->
-      <a href="https://projeto-quizmaker.web.app" class="btn-launch">
-        <span class="dot"></span>
-        Acessar o QuizMaker
-      </a>
+      <a href="#acesso" class="btn btn-primary">🚀 Acessar o Sistema</a>
       <a href="#objetivo" class="btn btn-outline">Conhecer o Projeto</a>
     </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     scroll
+  </div>
+</section>
+
+<!-- ACESSO RÁPIDO -->
+<section id="acesso">
+  <div class="acesso-header">
+    <p class="section-label">Acesso Direto</p>
+    <h2 class="section-title">Entre no Sistema</h2>
+    <p>Escolha seu perfil para acessar o QuizMaker diretamente</p>
+  </div>
+  <div class="acesso-cards">
+    <a href="https://projeto-quizmaker.web.app/?role=teacher" target="_blank" class="acesso-card professor">
+      <div class="acesso-emoji">👨‍🏫</div>
+      <h3>Sou Professor</h3>
+      <p>Crie, edite e publique quizzes para seus alunos. Gerencie perguntas, alternativas e acompanhe o conteúdo.</p>
+      <span class="acesso-tag">→ Acessar como Professor</span>
+    </a>
+    <a href="https://projeto-quizmaker.web.app/?role=student" target="_blank" class="acesso-card aluno">
+      <div class="acesso-emoji">🎓</div>
+      <h3>Sou Aluno</h3>
+      <p>Explore os quizzes disponíveis, responda as perguntas e veja sua pontuação no final de cada desafio.</p>
+      <span class="acesso-tag">→ Acessar como Aluno</span>
+    </a>
   </div>
 </section>
 
@@ -600,7 +437,7 @@
     <div class="objetivo-card">
       <h3>🎯 Meta do Software</h3>
       <p>
-        Facilitar o acesso à tecnologia na educação, oferecendo uma plataforma simples, gratuita e intuitiva para que professores de qualquer disciplina possam gamificar suas aulas em poucos cliques — sem precisar de senha ou cadastro.
+        Facilitar o acesso à tecnologia na educação, oferecendo uma plataforma online simples, gratuita e intuitiva para que professores de qualquer disciplina possam gamificar suas aulas em poucos cliques.
       </p>
     </div>
   </div>
@@ -616,13 +453,6 @@
         O QuizMaker possui uma interface limpa dividida em duas grandes áreas: a Área do Educador (para criar os desafios) e a Área do Aluno (para jogar).
       </p>
       <ul class="features-list">
-        <li>
-          <span class="feat-icon">👨‍🏫</span>
-          <div class="feat-text">
-            <strong>Acesso sem senha</strong>
-            <span>Selecione "Professor" ou "Aluno", informe seu nome e pronto. Sem cadastro.</span>
-          </div>
-        </li>
         <li>
           <span class="feat-icon">📝</span>
           <div class="feat-text">
@@ -640,8 +470,15 @@
         <li>
           <span class="feat-icon">📊</span>
           <div class="feat-text">
-            <strong>Placar e Resultado</strong>
-            <span>Ao final do quiz, o aluno recebe sua pontuação e mensagens de incentivo.</span>
+            <strong>Cálculo de Resultados</strong>
+            <span>Ao final do quiz, o aluno recebe sua pontuação e mensagens de incentivo automaticamente.</span>
+          </div>
+        </li>
+        <li>
+          <span class="feat-icon">☁️</span>
+          <div class="feat-text">
+            <strong>100% Online</strong>
+            <span>Acesse de qualquer dispositivo pelo navegador, sem instalação necessária.</span>
           </div>
         </li>
       </ul>
@@ -684,7 +521,7 @@
     <div class="ods-card ods-10">
       <div class="ods-num">10</div>
       <h4>Redução de Desigualdades</h4>
-      <p>Oferecer ferramentas de software gratuitas e que rodam em hardware modesto.</p>
+      <p>Oferecer ferramentas de software gratuitas e acessíveis em qualquer dispositivo.</p>
     </div>
     <div class="ods-card ods-17">
       <div class="ods-num">17</div>
@@ -729,8 +566,8 @@
   </div>
   <div class="masonry">
     <div class="masonry-item">
-      <div class="ph-icon">🎯</div>
-      <p>Tela de Entrada<br><small>Escolha Professor ou Aluno</small></p>
+      <div class="ph-icon">💻</div>
+      <p>Menu Principal<br><small>Navegação intuitiva</small></p>
     </div>
     <div class="masonry-item">
       <div class="ph-icon">📝</div>
@@ -755,54 +592,25 @@
   </div>
 </section>
 
-<!-- ── ACESSO DIRETO (new) ───────────────────────────────────────────────── -->
-<section id="acesso">
-  <div class="acesso-inner">
-    <p class="section-label" style="justify-content:center;">06 — Acesso</p>
-    <h2 class="section-title">Comece a usar agora</h2>
-    <p>
-      Sem cadastro, sem senha. Selecione seu perfil, informe seu nome e entre direto na plataforma.
-    </p>
-
-    <!-- Role preview cards -->
-    <div class="role-cards">
-      <a href="/" class="role-card">
-        <span class="role-emoji">👨‍🏫</span>
-        <span class="role-name">Professor</span>
-        <span class="role-desc">Criar e publicar<br>quizzes</span>
-      </a>
-      <a href="/" class="role-card">
-        <span class="role-emoji">🎓</span>
-        <span class="role-name">Aluno</span>
-        <span class="role-desc">Jogar quizzes<br>publicados</span>
-      </a>
-    </div>
-
-    <div class="acesso-cta-row">
-      <a href="https://projeto-quizmaker.web.app" class="btn-acesso-main">
-        🚀 Entrar no QuizMaker
-      </a>
-      <span class="acesso-note">Abre em segundos — funciona em qualquer dispositivo</span>
-    </div>
-  </div>
-</section>
-
-<!-- VÍDEO E DOWNLOAD -->
+<!-- DOWNLOAD -->
 <section id="download">
   <div class="video-inner">
     <div class="video-text">
-      <p class="section-label">07 — Download e Uso</p>
+      <p class="section-label">06 — Acesso e Download</p>
       <h2 class="section-title">Experimente o Aplicativo</h2>
       <p>
         Assista ao vídeo ao lado para entender passo a passo como criar seu primeiro questionário e executá-lo em sala de aula.
       </p>
       <p>
-        Prefere ter uma cópia local? Baixe os arquivos abaixo. Ou acesse diretamente o sistema online clicando no botão verde.
+        O aplicativo está disponível gratuitamente online. Acesse pelo botão abaixo — não é necessário instalar nada.
       </p>
-      <div class="cta-group">
-        <a href="https://projeto-quizmaker.web.app" class="btn btn-primary">▶ Acessar o Sistema</a>
-        <a href="#" class="btn btn-outline">↓ Baixar (.ZIP)</a>
-        <a href="#" class="btn btn-outline">📄 Documentação</a>
+      <div class="download-buttons">
+        <a href="https://projeto-quizmaker.web.app" target="_blank" class="btn btn-primary">
+          🚀 Abrir o QuizMaker
+        </a>
+        <a href="https://github.com/joaoc/QuizMaker" target="_blank" class="btn btn-outline">
+          📄 Ver Código no GitHub
+        </a>
       </div>
     </div>
     <div class="video-player">
@@ -823,13 +631,11 @@
   </div>
   <div class="footer-tags">
     <span class="tag">EdTech</span>
-    <span class="tag">Sem Login</span>
+    <span class="tag">Open Source</span>
     <span class="tag">Educação</span>
     <span class="tag">Gamificação</span>
   </div>
-  <a href="/" style="text-decoration:none;">
-    <span class="tag" style="background:rgba(0,196,154,0.2); border-color:var(--ocean-teal); color:var(--ocean-teal); font-weight:700; padding: 0.4rem 1rem;">▶ Acessar →</span>
-  </a>
+  <p class="footer-note">projeto-quizmaker.web.app</p>
 </footer>
 
 </body>
