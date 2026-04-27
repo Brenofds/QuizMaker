@@ -1,6 +1,4 @@
 // src/components/ProtectedRoute.jsx
-// Protege rotas verificando a identidade armazenada no localStorage.
-
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Spinner } from './ui';
@@ -16,10 +14,8 @@ export default function ProtectedRoute({ children, role }) {
     );
   }
 
-  // Not identified yet → entry page
   if (!user) return <Navigate to="/" replace />;
 
-  // Wrong role → entry page to re-select
   if (role && profile?.role !== role) return <Navigate to="/" replace />;
 
   return children;

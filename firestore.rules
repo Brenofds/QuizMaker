@@ -1,26 +1,20 @@
 rules_version = '2';
-// ─────────────────────────────────────────────────────────────────────────────
-// QuizMaker — Firestore Security Rules (modo sem autenticação)
-// Identidade gerenciada pelo app via localStorage; sem Firebase Auth.
-// Acesso aberto — apropriado para uso interno em escola/intranet.
-// ─────────────────────────────────────────────────────────────────────────────
-
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Quizzes: leitura e escrita abertas
     match /quizzes/{quizId} {
       allow read, write: if true;
-
-      // Perguntas: mesma política do quiz pai
       match /questions/{questionId} {
         allow read, write: if true;
       }
     }
 
-    // Coleção de usuários não é mais usada (identidade via localStorage),
-    // mas deixamos aberta caso seja reativada no futuro.
     match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Resultados de quizzes respondidos pelos alunos
+    match /results/{resultId} {
       allow read, write: if true;
     }
   }
