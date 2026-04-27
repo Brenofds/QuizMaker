@@ -1,43 +1,29 @@
 // src/App.jsx
-// Roteamento principal da aplicação.
-// Todas as rotas protegidas verificam autenticação e role.
+// Roteamento principal. Login removido — identidade via seleção de papel + nome.
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
-import LoginPage from './pages/LoginPage';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import TeacherManagement from './pages/admin/TeacherManagement';
-import AdminQuizzes from './pages/admin/AdminQuizzes';
-import TeacherDashboard from './pages/teacher/TeacherDashboard';
-import QuizList from './pages/teacher/QuizList';
-import QuizForm from './pages/teacher/QuizForm';
-import { Unauthorized, NotFound } from './pages/Misc';
+import EntryPage          from './pages/EntryPage';
+import TeacherDashboard   from './pages/teacher/TeacherDashboard';
+import QuizList           from './pages/teacher/QuizList';
+import QuizForm           from './pages/teacher/QuizForm';
+import StudentHome        from './pages/student/StudentHome';
+import QuizPlay           from './pages/student/QuizPlay';
+import { NotFound }       from './pages/Misc';
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+          {/* Entry — role selector + name */}
+          <Route path="/" element={<EntryPage />} />
 
-          {/* Root redirect */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
-
-          {/* ── Admin routes ────────────────────────────────────────── */}
-          <Route path="/admin" element={
-            <ProtectedRoute role="admin"><AdminDashboard /></ProtectedRoute>
-          } />
-          <Route path="/admin/teachers" element={
-            <ProtectedRoute role="admin"><TeacherManagement /></ProtectedRoute>
-          } />
-          <Route path="/admin/quizzes" element={
-            <ProtectedRoute role="admin"><AdminQuizzes /></ProtectedRoute>
-          } />
+          {/* Legacy redirect */}
+          <Route path="/login" element={<Navigate to="/" replace />} />
 
           {/* ── Teacher routes ──────────────────────────────────────── */}
           <Route path="/teacher" element={
@@ -51,6 +37,14 @@ export default function App() {
           } />
           <Route path="/teacher/quizzes/:quizId/edit" element={
             <ProtectedRoute role="teacher"><QuizForm /></ProtectedRoute>
+          } />
+
+          {/* ── Student routes ──────────────────────────────────────── */}
+          <Route path="/student" element={
+            <ProtectedRoute role="student"><StudentHome /></ProtectedRoute>
+          } />
+          <Route path="/student/quiz/:quizId" element={
+            <ProtectedRoute role="student"><QuizPlay /></ProtectedRoute>
           } />
 
           {/* 404 */}

@@ -1,80 +1,27 @@
 rules_version = '2';
 // ─────────────────────────────────────────────────────────────────────────────
-// QuizMaker — Firestore Security Rules
-// Última atualização: 2026
+// QuizMaker — Firestore Security Rules (modo sem autenticação)
+// Identidade gerenciada pelo app via localStorage; sem Firebase Auth.
+// Acesso aberto — apropriado para uso interno em escola/intranet.
 // ─────────────────────────────────────────────────────────────────────────────
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // ── Funções auxiliares ─────────────────────────────────────────────────
-
-    function isAuthenticated() {
-      return request.auth != null;
-    }
-
-    function getUserData() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
-    }
-
-    function isAdmin() {
-      return isAuthenticated() && getUserData().role == 'admin';
-    }
-
-    function isTeacher() {
-      return isAuthenticated() && getUserData().role == 'teacher';
-    }
-
-    function isOwner(uid) {
-      return isAuthenticated() && request.auth.uid == uid;
-    }
-
-    function isActiveTeacher() {
-      let data = getUserData();
-      return isAuthenticated() && data.role == 'teacher' && data.active == true;
-    }
-
-    // ── Coleção: users ─────────────────────────────────────────────────────
-
-    match /users/{userId} {
-      // Usuário lê seu próprio perfil; admin lê qualquer um
-      allow read: if isOwner(userId) || isAdmin();
-
-      // Somente admin cria e atualiza usuários
-      allow create: if isAdmin();
-      allow update: if isAdmin();
-
-      // Admin pode desativar contas (soft delete via campo active)
-      allow delete: if isAdmin();
-    }
-
-    // ── Coleção: quizzes ───────────────────────────────────────────────────
-
+    // Quizzes: leitura e escrita abertas
     match /quizzes/{quizId} {
-      // Admin lê qualquer quiz; professor ativo lê apenas os seus
-      allow read: if isAdmin()
-                  || (isActiveTeacher() && resource.data.authorId == request.auth.uid);
+      allow read, write: if true;
 
-      // Professor ativo cria quiz vinculado ao próprio uid
-      allow create: if isActiveTeacher()
-                    && request.resource.data.authorId == request.auth.uid
-                    && request.resource.data.keys().hasAll(['title', 'subject', 'authorId', 'authorName']);
-
-      // Autor ou admin pode atualizar/excluir
-      allow update: if isAdmin() || (isActiveTeacher() && resource.data.authorId == request.auth.uid);
-      allow delete: if isAdmin() || (isActiveTeacher() && resource.data.authorId == request.auth.uid);
-
-      // ── Sub-coleção: questions ─────────────────────────────────────────
-
+      // Perguntas: mesma política do quiz pai
       match /questions/{questionId} {
-        allow read: if isAdmin()
-                    || (isActiveTeacher()
-                        && get(/databases/$(database)/documents/quizzes/$(quizId)).data.authorId == request.auth.uid);
-
-        allow write: if isAdmin()
-                     || (isActiveTeacher()
-                         && get(/databases/$(database)/documents/quizzes/$(quizId)).data.authorId == request.auth.uid);
+        allow read, write: if true;
       }
+    }
+
+    // Coleção de usuários não é mais usada (identidade via localStorage),
+    // mas deixamos aberta caso seja reativada no futuro.
+    match /users/{userId} {
+      allow read, write: if true;
     }
   }
 }

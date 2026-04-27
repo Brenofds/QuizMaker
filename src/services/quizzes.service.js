@@ -1,5 +1,5 @@
 // src/services/quizzes.service.js
-// CRUD completo de quizzes e perguntas.
+// CRUD de quizzes e perguntas. Sem Firebase Auth — usa IDs do localStorage.
 
 import {
   collection, doc, addDoc, updateDoc, deleteDoc, getDoc, getDocs,
@@ -49,8 +49,17 @@ export async function getTeacherQuizzes(teacherUid) {
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
+/** Retorna todos os quizzes publicados — usado pela área do aluno. */
+export async function getPublishedQuizzes() {
+  const q = query(
+    collection(db, 'quizzes'),
+    where('isPublished', '==', true),
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
 export async function updateQuiz(quizId, quizData, questions) {
-  // Update quiz document
   await updateDoc(doc(db, 'quizzes', quizId), {
     title:         quizData.title,
     subject:       quizData.subject,
@@ -59,7 +68,6 @@ export async function updateQuiz(quizId, quizData, questions) {
     updatedAt:     serverTimestamp(),
   });
 
-  // Replace all questions: delete old, add new
   const oldQSnap = await getDocs(collection(db, 'quizzes', quizId, 'questions'));
   const batch = writeBatch(db);
   oldQSnap.docs.forEach(d => batch.delete(d.ref));
