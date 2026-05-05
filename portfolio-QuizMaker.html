@@ -66,7 +66,6 @@
       radial-gradient(ellipse 40% 80% at 15% 80%, rgba(19,84,67,0.55) 0%, transparent 60%);
   }
 
-  /* animated waves */
   .waves-bg {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; overflow: hidden;
   }
@@ -113,8 +112,6 @@
   .btn-primary:hover { background: var(--ocean-foam); transform: translateY(-2px); }
   .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
   .btn-outline:hover { border-color: var(--ocean-teal); color: var(--ocean-teal); }
-  .btn-gold { background: var(--gold); color: var(--ocean-deep); }
-  .btn-gold:hover { background: #f7b84a; transform: translateY(-2px); }
 
   .hero-scroll {
     position: absolute; bottom: 3rem; right: 4rem; z-index: 1;
@@ -128,48 +125,55 @@
   }
   @keyframes scroll-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
-  /* ── ACESSO ── */
+  /* ── ACESSO ── fundo igual ao restante da página */
   #acesso {
-    background: linear-gradient(135deg, #0F1B2D 0%, #1A2D45 100%);
+    background: linear-gradient(160deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%);
     padding: 5rem 4rem;
-    border-top: 1px solid rgba(0,196,154,0.2);
-    border-bottom: 1px solid rgba(0,196,154,0.2);
+    border-top: 1px solid rgba(0,196,154,0.15);
+    border-bottom: 1px solid rgba(0,196,154,0.15);
   }
   .acesso-header { text-align: center; margin-bottom: 3rem; }
-  .acesso-header .section-label { justify-content: center; margin-bottom: 1rem; }
-  .acesso-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); }
+  .acesso-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
   .acesso-header p { color: rgba(255,255,255,0.6); margin-top: 0.8rem; }
-  .acesso-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 820px; margin: 0 auto; }
 
-  .acesso-card {
-    border-radius: 16px; padding: 2.5rem 2rem;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
-    text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden;
-  }
-  .acesso-card:hover { transform: translateY(-6px); }
-  .acesso-card.professor {
-    background: linear-gradient(135deg, #0F1B2D 0%, #1A3A5C 100%);
-    border: 1.5px solid rgba(245,166,35,0.3);
-    box-shadow: 0 4px 24px rgba(245,166,35,0.1);
-  }
-  .acesso-card.professor:hover { border-color: rgba(245,166,35,0.7); box-shadow: 0 12px 40px rgba(245,166,35,0.2); }
-  .acesso-card.aluno {
-    background: linear-gradient(135deg, #093028 0%, #135443 100%);
+  /* Um único card centralizado */
+  .acesso-single {
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 16px;
+    padding: 2.8rem 2.4rem;
+    background: rgba(255,255,255,0.05);
     border: 1.5px solid rgba(0,196,154,0.3);
     box-shadow: 0 4px 24px rgba(0,196,154,0.1);
+    text-align: center;
+    transition: all 0.3s;
   }
-  .acesso-card.aluno:hover { border-color: rgba(0,196,154,0.7); box-shadow: 0 12px 40px rgba(0,196,154,0.2); }
-
-  .acesso-emoji { font-size: 3rem; line-height: 1; }
-  .acesso-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); }
-  .acesso-card p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
-  .acesso-tag {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    padding: 0.4rem 1rem; border-radius: 999px;
-    font-size: 0.8rem; font-weight: 600; margin-top: auto;
+  .acesso-single:hover {
+    border-color: rgba(0,196,154,0.6);
+    box-shadow: 0 12px 40px rgba(0,196,154,0.18);
+    transform: translateY(-4px);
   }
-  .acesso-card.professor .acesso-tag { background: rgba(245,166,35,0.2); color: var(--gold); }
-  .acesso-card.aluno .acesso-tag { background: rgba(0,196,154,0.2); color: var(--ocean-teal); }
+  .acesso-single .acesso-emoji { font-size: 3.5rem; margin-bottom: 1.2rem; }
+  .acesso-single h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.8rem;
+  }
+  .acesso-single p {
+    font-size: 0.95rem; color: rgba(255,255,255,0.65);
+    line-height: 1.65; margin-bottom: 1.8rem;
+  }
+  .acesso-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2.2rem; border-radius: 6px;
+    background: var(--ocean-teal); color: var(--ocean-deep);
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .acesso-btn:hover { background: var(--ocean-foam); transform: translateY(-2px); }
 
   /* ── SECTIONS ── */
   section { padding: 6rem 4rem; }
@@ -220,7 +224,6 @@
   .feat-text strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--ocean-foam); }
   .feat-text span { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
 
-  /* tech stack pills */
   .tech-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 2.5rem; }
   .tech-pill {
     padding: 0.4rem 1rem; border-radius: 999px;
@@ -229,7 +232,6 @@
     border: 1px solid rgba(0,196,154,0.25); letter-spacing: 0.04em;
   }
 
-  /* ── IMAGENS DAS FUNCIONALIDADES ── */
   .desc-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
   .img-container {
     border-radius: 8px; overflow: hidden;
@@ -369,7 +371,6 @@
     .objetivo-grid, .desc-grid, .video-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .bncc-grid { grid-template-columns: 1fr 1fr; }
     .masonry { columns: 2; }
-    .acesso-cards { grid-template-columns: 1fr; max-width: 440px; }
     footer { flex-direction: column; text-align: center; }
   }
   @media (max-width: 600px) {
@@ -427,22 +428,16 @@
 <!-- ACESSO RÁPIDO -->
 <section id="acesso">
   <div class="acesso-header">
-    <p class="section-label">Acesso Direto</p>
-    <h2 class="section-title">Entre no Sistema</h2>
-    <p>Escolha seu perfil para acessar o QuizMaker diretamente</p>
+    <p class="section-label" style="justify-content:center;">Acesso Direto</p>
+    <h2>Entre no Sistema</h2>
+    <p>Acesse o QuizMaker e comece a usar agora mesmo</p>
   </div>
-  <div class="acesso-cards">
-    <a href="https://projeto-quizmaker.web.app/?role=teacher" target="_blank" class="acesso-card professor">
-      <div class="acesso-emoji">👨‍🏫</div>
-      <h3>Sou Professor</h3>
-      <p>Crie, edite e publique quizzes para seus alunos. Gerencie perguntas, alternativas, explicações e acompanhe o desempenho da turma em tempo real.</p>
-      <span class="acesso-tag">→ Acessar como Professor</span>
-    </a>
-    <a href="https://projeto-quizmaker.web.app/?role=student" target="_blank" class="acesso-card aluno">
-      <div class="acesso-emoji">🎓</div>
-      <h3>Sou Aluno</h3>
-      <p>Explore os quizzes publicados, responda as perguntas com feedback instantâneo, veja sua pontuação e consulte seu histórico de resultados.</p>
-      <span class="acesso-tag">→ Acessar como Aluno</span>
+  <div class="acesso-single">
+    <div class="acesso-emoji">🎯</div>
+    <h3>Acessar o QuizMaker</h3>
+    <p>Entre na plataforma e escolha seu perfil — professor ou aluno — diretamente na tela inicial do sistema.</p>
+    <a href="https://projeto-quizmaker.web.app" target="_blank" class="acesso-btn">
+      🚀 Abrir o sistema
     </a>
   </div>
 </section>
@@ -529,8 +524,6 @@
         <span class="tech-pill">CSS Vars</span>
       </div>
     </div>
-    
-    <!-- Imagens Inseridas Aqui -->
     <div class="desc-visual">
       <div class="img-container tall">
         <img src="screenshots/dashboard.png" alt="Dashboard do Professor">
@@ -542,7 +535,6 @@
         <img src="screenshots/resultado.png" alt="Tela de Resultados">
       </div>
     </div>
-    
   </div>
 </section>
 
@@ -666,8 +658,6 @@
     <h2 class="section-title">Screenshots do Software</h2>
     <p>Confira algumas telas da versão atual do aplicativo em funcionamento.</p>
   </div>
-  
-  <!-- Imagens Inseridas Aqui -->
   <div class="masonry">
     <div class="masonry-item"><img src="screenshots/menu.png" alt="Menu do Aplicativo"></div>
     <div class="masonry-item"><img src="screenshots/editor.png" alt="Editor de Quiz"></div>
@@ -676,7 +666,6 @@
     <div class="masonry-item"><img src="screenshots/erro.png" alt="Tela de Erro"></div>
     <div class="masonry-item"><img src="screenshots/stats.png" alt="Estatísticas"></div>
   </div>
-  
 </section>
 
 <!-- VÍDEO -->
@@ -693,8 +682,6 @@
       </p>
       <a href="https://projeto-quizmaker.web.app" class="btn btn-primary" target="_blank">🌐 Acessar ao vivo</a>
     </div>
-    
-    <!-- Thumbnail do Vídeo Inserida Aqui -->
     <div class="video-player" style="background: url('screenshots/thumb-video.jpg') center/cover;">
       <div class="video-label">▶ Demonstração</div>
       <div class="video-overlay" style="background: rgba(0,0,0,0.4);">
@@ -702,7 +689,6 @@
         <p class="video-caption">Insira aqui o link do vídeo<br>(YouTube, Google Drive, etc.)</p>
       </div>
     </div>
-    
   </div>
 </section>
 
